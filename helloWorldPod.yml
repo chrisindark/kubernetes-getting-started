@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  labels:
+    app: hello-world
+  name: hello-world
+  namespace: cloudclass
+spec:
+  containers:
+    - name: hello-world
+      image: gcr.io/google-samples/node-hello:1.0
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 8080
+    - name: nginx
+      image: nginx:latest
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 80

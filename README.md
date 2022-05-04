@@ -1,5 +1,7 @@
 # kubernetes-getting-started
 
+### install minikube
+
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
@@ -43,7 +45,7 @@ kubectl get services # List all services in the namespace
 
 kubectl get services -n cloudclass # List all services in cloudclass namespace
 
-# describe the containers running inside a pod
+### describe the containers running inside a pod
 
 kubectl describe pods <pod name>
 
@@ -51,11 +53,11 @@ kubectl get events -n cloudclass # View cluster events
 
 kubectl config view # View the kubectl configuration
 
-# Port forward service hello-world-service which points to port 8080 in cloudclass namespace to port 8080
+### Port forward service hello-world-service which points to port 8080 in cloudclass namespace to port 8080
 
 kubectl port-forward service/hello-world-service -n cloudclass 8080:8080
 
-# Port forward service hello-world-service which points to port 80 in cloudclass namespace to port 8080
+### Port forward service hello-world-service which points to port 80 in cloudclass namespace to port 8080
 
 kubectl port-forward service/hello-world-service -n cloudclass 8080:80
 
@@ -64,41 +66,41 @@ kubectl delete deployment nginx-deployment
 
 kubectl get storageclass
 
-# enabling ingress addon in k8 cluster
+### enabling ingress addon in k8 cluster
 
 minikube addons enable ingress
 
-# enabling metrics-server addon in k8 cluster
+### enabling metrics-server addon in k8 cluster
 
 minikube addons enable metrics-server
 
-# Rolling restart of the "hello-world" deployment
+### Rolling restart of the "hello-world" deployment
 
 k rollout restart deployment/hello-world -n cloudclass
 
 // check history of deployment rollouts
 kubectl rollout history deployment/hello-world -n cloudclass
 
-# run nginx pod at port 8080 from k8
+### run nginx pod at port 8080 from k8
 
 kubectl apply -f nginxPod.yml
 kubectl port-forward nginx 8080:80
 
-# run nginx deployment at port 8080 from k8
+### run nginx deployment at port 8080 from k8
 
 k apply -f nginxDeployment.yml
 k port-forward deployment/nginx-deployment 8080:80
 
-# run nginx service at port 8080 from k8
+### run nginx service at port 8080 from k8
 
 k apply -f nginxService.yml
 kubectl port-forward service/nginx-service 8080:8080
 
-# run sh inside an nginx pod in k8
+### run sh inside an nginx pod in k8
 
 k exec -it nginx-deployment-66978d954c-rkw4x -c nginx -- /bin/sh
 
-# create a statefulset with a headless service
+### create a statefulset with a headless service
 
 k apply -f nginxStatefulSet
 k port-forward statefulset/nginx-statefulset 8080:80

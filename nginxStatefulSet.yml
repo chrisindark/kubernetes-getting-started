@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-statefulset-service
+  namespace: default
+  labels:
+    app: nginx-service
+spec:
+  ports:
+    - name: port
+      port: 8081
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: nginx-statefulset
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-statefulset
+  namespace: default
+  labels:
+    app: nginx-statefulset
+spec:
+  serviceName: "nginx-service"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx-statefulset # has to match .spec.template.metadata.labels
+  template:
+    metadata:
+      labels:
+        app: nginx-statefulset # has to match .spec.selector.matchLabels
+    spec:
+      containers:
+        - name: nginx-statefulset
+          image: nginx:1.14.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: testpv
+              mountPath: /home/christopher
+          # volumes:
+          # - name: testpvc
+          #   persistentVolumeClaim:
+          #     claimName: testpvc
+  volumeClaimTemplates:
+    - metadata:
+        name: testpv
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi
