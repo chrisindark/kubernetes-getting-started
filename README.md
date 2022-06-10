@@ -109,3 +109,6 @@ k port-forward statefulset/nginx-statefulset 8080:80
 kubectl get daemonsets -n cloudclass
 // check how to delete a daemonset
 // check how to delete a replicaset
+
+// check the jobs to run pi till the 2000th decimal place
+kubectl describe jobs/pi
