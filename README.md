@@ -1,6 +1,6 @@
 # kubernetes-getting-started
 
-### install minikube
+### install minikube on UBUNTU
 
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
@@ -9,6 +9,19 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 minikube start
 
 minikube dashboard
+
+### install minikube on MAC
+
+brew install kubectl
+brew install minikube
+
+download docker desktop and install from UI
+
+open -a Docker
+
+minikube version
+
+### kubectl config setup and switching between multiple clusters
 
 kubectl config view # Show Merged kubeconfig settings.
 kubectl config get-contexts # display list of contexts
